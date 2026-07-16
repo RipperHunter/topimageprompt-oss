@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Editorial illustration demo artwork</title>
+  <desc id="desc">Playful geometric editorial illustration in warm colors.</desc>
+  <rect width="1200" height="800" fill="#fff7ed"/>
+  <path d="M0 620 260 330l215 210 180-310 250 300 295-245v515H0z" fill="#fed7aa"/>
+  <circle cx="300" cy="255" r="125" fill="#fb7185"/>
+  <rect x="485" y="145" width="235" height="235" rx="48" fill="#8b5cf6" transform="rotate(12 602 262)"/>
+  <path d="M790 135 1090 250 890 480z" fill="#22c55e"/>
+  <path d="M190 675c155-160 310-160 465 0s310 160 465 0" fill="none" stroke="#0f172a" stroke-width="34" stroke-linecap="round"/>
+</svg>

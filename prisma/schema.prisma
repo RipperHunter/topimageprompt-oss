@@ -1,0 +1,230 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  hashedPassword String?
+  name           String?
+  avatar         String?
+  role           String   @default("USER") // "USER" or "ADMIN"
+  emailNotifications Boolean @default(true)
+  publicProfile      Boolean @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  collections Collection[]
+  saves       Save[]
+  apiKeys     ApiKey[]
+  savedPrompts SavedPrompt[]
+}
+
+model Prompt {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String?  @unique // SEO-friendly URL slug generated from title
+  externalId  String?  @unique // Idempotency key for bulk imports
+  promptText  String
+  engine      String
+  category    String   @default("General")
+  aspectRatio String   @default("16:9")
+  imageUrl    String
+  originalImageUrl String?
+  copies      Int      @default(0)
+  tags        String   @default("[]") // JSON array of SEO keyword strings
+  published   Boolean  @default(true)  // true = visible on public pages, false = draft
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  saves       Save[]
+  savedBy     SavedPrompt[]
+
+  @@index([published])
+  @@index([copies])
+  @@index([createdAt])
+  @@index([category])
+  @@index([engine])
+  @@index([slug])
+  @@index([externalId])
+  @@index([published, createdAt])
+}
+
+model Collection {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  description String?
+  curator     String   @default("PromptVault Team")
+  heroImages  String   @default("[]") // JSON array of image URLs
+  promptCount Int      @default(0)
+  isPublic    Boolean  @default(true)
+  featured    Boolean  @default(false)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  saves       Save[]
+}
+
+model Blog {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  category        String   @default("Tutorial")
+  author          String   @default("topimageprompt Team")
+  heroImage       String?
+  heroCaption     String?
+  intro           String?
+  content         String   @default("[]") // JSON array of sections
+  quote           String?  // JSON: {text, author}
+  readTime        String   @default("5 min read")
+  views           Int      @default(0)
+  published       Boolean  @default(false)
+  visibility      String   @default("Public")
+  featuredOnHome  Boolean  @default(false)
+  isHeroPost      Boolean  @default(false)
+  tags            String   @default("[]") // JSON array of strings
+  
+  // SEO Fields
+  seoTitle        String?
+  metaDescription String?
+  canonicalUrl    String?
+  coverImageAlt   String?
+  noindex         Boolean  @default(false)
+  nofollow        Boolean  @default(false)
+
+  // AEO Fields
+  faq             String   @default("[]") // JSON array of {q, a}
+  tldr            String?
+  
+  // GEO Fields
+  citations       String   @default("[]") // JSON array of URLs/text
+  authorBioUrl    String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  slug        String   @unique
+  groupType   String   @default("Style")
+  status      String   @default("Active")
+  imageUrl    String?
+  promptCount Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSettings {
+  id               String   @id @default("global")
+  heroImageLeftOut String?
+  heroImageLeft    String?
+  heroImageCenter  String?
+  heroImageRight   String?
+  heroImageRightOut String?
+  exploreHero      String?
+  pinterestImage1  String?
+  pinterestImage2  String?
+  pinterestImage3  String?
+  pinterestImage4  String?
+  pinterestImage5  String?
+  loginImages      String   @default("[]") // JSON array of strings
+  heroPrompts      String   @default("[]") // JSON array of prompt IDs
+  heroCustomTexts  String   @default("[]") // JSON array of strings
+  pinterestFollowers String @default("10K+") // Displayed on homepage Pinterest section
+  allowedEngines   String   @default("[]") // JSON array of strings
+  allowedStyles    String   @default("[]") // JSON array of strings
+  allowedRatios    String   @default("[]") // JSON array of strings
+  engineMetadata   String   @default("[]") // JSON array of objects: { name, icon, gradient, imageUrl }
+  styleMetadata    String   @default("[]") // JSON array of objects: { name, icon, gradient, imageUrl }
+  updatedAt        DateTime @updatedAt
+}
+
+model Save {
+  id           String     @id @default(uuid())
+  userId       String
+  promptId     String
+  collectionId String?
+
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prompt       Prompt     @relation(fields: [promptId], references: [id], onDelete: Cascade)
+  collection   Collection? @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime   @default(now())
+
+  @@unique([userId, promptId, collectionId])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  status    String   @default("Subscribed")
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  status    String   @default("Unread")
+  createdAt DateTime @default(now())
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(uuid())
+  eventType String   // e.g. "COPY_PROMPT", "PAGE_VIEW"
+  promptId  String?
+  source    String?  // e.g. "Pinterest", "Organic Search", "Direct"
+  createdAt DateTime @default(now())
+
+  @@index([promptId])
+  @@index([createdAt])
+}
+
+model ApiKey {
+  id          String   @id @default(uuid())
+  name        String
+  key         String   @unique
+  prefix      String
+  rateLimit   Int      @default(100)
+  requests    Int      @default(0)
+  windowStart DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SavedPrompt {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  promptId  String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prompt    Prompt   @relation(fields: [promptId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, promptId])
+  @@index([userId])
+}
+
+model EmailVerification {
+  id        String   @id @default(uuid())
+  email     String
+  otp       String   // bcrypt-hashed 6-digit code
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}

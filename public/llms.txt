@@ -1,0 +1,31 @@
+# PromptVault
+
+> PromptVault is an open-source library of AI-generated image examples paired with copy-ready prompt text, model context, visual style, and aspect ratio.
+
+Replace `https://your-domain.example` with your deployed site URL.
+
+Canonical site: https://your-domain.example/
+XML sitemap: https://your-domain.example/sitemap.xml
+Human-readable sitemap: https://your-domain.example/sitemap-html
+
+## Primary sections
+
+- [Explore prompts](https://your-domain.example/explore): Interactive prompt browser.
+- [Prompt topics](https://your-domain.example/prompts): Crawlable model and visual-style hubs.
+- [Trending prompts](https://your-domain.example/trending): Popular prompt examples.
+- [Collections](https://your-domain.example/collections): Editorially curated prompt sets.
+- [Blog](https://your-domain.example/blog): Prompt-engineering tutorials, comparisons, and practical guides.
+- [About](https://your-domain.example/about): Mission and editorial approach.
+- [Terms and prompt license](https://your-domain.example/terms#prompt-license): Usage and licensing information.
+
+## Content conventions
+
+- Prompt detail URLs use `/prompt/{descriptive-slug}`.
+- Topic hubs use `/prompts/engine/{model-slug}` and `/prompts/style/{style-slug}`.
+- Blog articles use `/blog/{article-slug}`.
+- Prompt pages identify the prompt text, model, visual category, aspect ratio, and example image when available.
+- Blog pages may include a summary, visible FAQs, author information, citations, related articles, and relevant prompt examples.
+
+## Crawler policy
+
+Search and answer-engine crawlers named in robots.txt may crawl public content. Private account, administrator, and API paths are excluded. Training-only crawlers listed as disallowed in robots.txt must not crawl the site.

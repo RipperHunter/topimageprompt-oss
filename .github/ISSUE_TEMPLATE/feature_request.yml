@@ -1,0 +1,34 @@
+name: Feature request
+description: Propose an improvement to PromptVault OSS
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user need would this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior, important tradeoffs, and possible alternatives.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Prompt library
+        - Blog publishing
+        - Admin and imports
+        - Authentication and security
+        - SEO and structured data
+        - Performance and accessibility
+        - Documentation and deployment
+    validations:
+      required: true
+

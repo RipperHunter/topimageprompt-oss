@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Monochrome demo artwork</title>
+  <desc id="desc">Minimal black and white architectural composition.</desc>
+  <rect width="1000" height="1000" fill="#f8fafc"/>
+  <rect x="110" y="110" width="780" height="780" rx="70" fill="#0f172a"/>
+  <circle cx="500" cy="500" r="285" fill="#f8fafc"/>
+  <rect x="420" y="90" width="160" height="820" fill="#0f172a"/>
+  <rect x="90" y="420" width="820" height="160" fill="#0f172a"/>
+  <circle cx="500" cy="500" r="82" fill="#f8fafc"/>
+</svg>

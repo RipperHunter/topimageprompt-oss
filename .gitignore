@@ -1,0 +1,128 @@
+# ===================================================
+# PromptVault - Production .gitignore
+# ===================================================
+
+# ---- Dependencies ----
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ---- Next.js Build Outputs ----
+/.next/
+/out/
+/build
+next-env.d.ts
+*.tsbuildinfo
+
+# ---- Environment & Secrets (NEVER commit these) ----
+.env
+.env.*
+!.env.example
+.env.local
+.env.development
+.env.production
+.env.staging
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ---- Database Files (NEVER commit these) ----
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-journal
+/prisma/*.db
+/prisma/*.db-journal
+/prisma/*.sqlite
+
+# ---- Prisma Generated Client ----
+/app/generated/prisma
+
+# ---- Private agent and internal notes ----
+AGENTS.md
+CLAUDE.md
+CHAT_SUMMARY.md
+BLOG_DETAIL.md
+ORIGINAL_REQUEST.md
+
+# ---- Utility / Maintenance Scripts ----
+# These scripts manipulate DB/admin and must not be public
+check_db.js
+make_admin.js
+create_pages.js
+fix_links.js
+find_unclosed.py
+fix_admin_sidebars.py
+fix_imports.py
+fix_navbar_links.py
+fix_signup.py
+inject_admin.py
+inject_filtering.py
+inject_messages_link.py
+inject_signout.py
+inject_state.py
+make_explore_interactive.py
+migrate_html.py
+
+# ---- Test & Coverage ----
+/coverage
+
+# ---- Debug & Logs ----
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.log
+verification_*.out
+verification_*.err
+
+# ---- OS & Editor Files ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ---- Vercel & Deployment ----
+.vercel
+
+# ---- Hostinger Build Artifacts ----
+.hostinger-package/
+
+# ---- Zip Archives ----
+*.zip
+
+# ---- Agent Logs and Scratch Files ----
+.agents/
+build_output.txt
+server_pid.txt
+test_lockfile.js
+search_lock.js
+
+# ---- Uploads ----
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# ---- Temp & Lock Files ----
+/tmp/
+/build.lock
+
+
+
+# Build artifacts
+.build.lock
+build_log.txt
+build_*.txt
+next_build_debug.txt
+*.lock

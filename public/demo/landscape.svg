@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Landscape demo artwork</title>
+  <desc id="desc">Layered mountains beneath a warm sunset.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#312e81"/>
+      <stop offset=".55" stop-color="#f472b6"/>
+      <stop offset="1" stop-color="#fdba74"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="url(#sky)"/>
+  <circle cx="850" cy="225" r="105" fill="#fef3c7"/>
+  <path d="M0 610 260 320l215 240 175-300 310 350 130-180 110 155v175H0z" fill="#312e81"/>
+  <path d="M0 665 250 500l190 130 185-210 265 235 165-105 145 110v100H0z" fill="#111827"/>
+  <path d="M0 710c210-55 385-45 560 10 215 68 425 45 640-20v60H0z" fill="#030712"/>
+</svg>

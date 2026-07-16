@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract demo artwork</title>
+  <desc id="desc">Colorful translucent spheres on a dark background.</desc>
+  <defs>
+    <radialGradient id="a"><stop stop-color="#f472b6"/><stop offset="1" stop-color="#7c3aed"/></radialGradient>
+    <radialGradient id="b"><stop stop-color="#67e8f9"/><stop offset="1" stop-color="#2563eb"/></radialGradient>
+    <radialGradient id="c"><stop stop-color="#fde047"/><stop offset="1" stop-color="#f97316"/></radialGradient>
+  </defs>
+  <rect width="1000" height="1000" fill="#080b16"/>
+  <circle cx="345" cy="380" r="265" fill="url(#a)" opacity=".9"/>
+  <circle cx="640" cy="420" r="245" fill="url(#b)" opacity=".78"/>
+  <circle cx="500" cy="670" r="215" fill="url(#c)" opacity=".72"/>
+  <circle cx="500" cy="500" r="350" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="8"/>
+</svg>
